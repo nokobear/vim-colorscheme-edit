@@ -1,0 +1,310 @@
+*csedit.txt* Csedit - Colorscheme Editor or Dumper
+                                                                       *csedit*
+                                                 #####   #####              ~
+    #### ####                                    #####   #####   ####       ~
+   ##### #####                                   #####          #####       ~
+  ######  ####   ##########    #### ####    #### #####   #####  ##### ####  ~
+  ######        #####    ###  ##### #####  ##### #####   #####  ##### ####  ~
+  ######            ####      ##### #####  ##### #####   #####  #####       ~
+   ##### #####  ###    #####  #####        ##### #####   #####  ##### ##### ~
+    #### ####    ##########    #### ####    #### #####   #####   #### ####  ~
+
+Author:      nokobear <nokobear.git at gmail dot com>
+Version:     v1.0.0
+Last Change: 2019 Aug 26
+License:     MIT license
+
+==============================================================================
+CONTENTS                                                      *csedit-contents*
+
+    1. Introduction.......................|csedit-introduction|
+    2. Commands...........................|csedit-commands|
+    3. Keymaps............................|csedit-keymaps|
+    4. Usage..............................|csedit-usage|
+    5. Options............................|csedit-options|
+    6. Change log.........................|csedit-changelog|
+    7. License............................|csedit-license|
+
+==============================================================================
+INTRODUCTION                                              *csedit-introduction*
+
+A text-based easily colorscheme-editor (or dumper) on vim.
+
+Features:~
+  * Text-based colorscheme editor (or dumper).
+  * Can check colors visually on vim.
+  * Can output both terminal and GUI colorschemes.
+  * Can output simple codes.
+  * Uses the native file format (.csed) which is easy to edit.
+  * Uses mainly 256 index colors.
+  * Supports for both gVim and Terminal Vim version 7.0+.
+  * Written in 100% vimscript with no outside dependencies.
+==============================================================================
+COMMANDS                                                      *csedit-commands*
+
+Dumps current colorscheme to .csed file.
+.csed is native format to discribe colorschemes.
+                                                                  *csedit-dump*
+>
+  :DumpColorScheme
+<
+Items only used for colorschemes will be dumped.
+                                                               *csedit-dumpall*
+>
+  :DumpColorSchemeAll
+<
+All items will be dumped.
+
+
+==============================================================================
+KEYMAPS                                                        *csedit-keymaps*
+
+While editing {*.csed}, following keymaps are available.
+
+  <C-l> ........ redraw highlights
+  <C-s> ........ build (creates colorscheme)
+
+==============================================================================
+USAGE                                                            *csedit-usage*
+
+1. Dump current colorscheme ~
+First, just try
+>
+  :DumpColorScheme
+<
+After this operation, a file "dump-{colorscheme}.csed" will be created in the
+directory "~/.vim/colors/" and opened.
+
+2. Rename and Edit {colorscheme}.csed ~
+You can rename the .csed file to your preferred name.
+>
+  :w my_custom_colorscheme.csed
+  :e my_custom_colorscheme.csed
+<
+The basename of .csed is used as the colorscheme name.
+
+3. Check highlight colors ~
+Press <C-l>
+will update highlights, and you can check colors visually.
+
+4. Build ~
+Press <C-s>
+The colorscheme file "{basename}.vim" will be created in "~/.vim/colors/".
+
+You'll get your own colorscheme finally.
+
+------------------------------------------------------------------------------
+
+Csedit uses 256 index colors, you can check it with this URL.
+https://github.com/nokobear/vim-colorscheme-edit/blob/master/img/presets/tango.png
+or local file
+../img/presets/tango.png
+
+==============================================================================
+OPTIONS                                                        *csedit-options*
+
+Overview:~
+---------
+Build-options:
+  |g:csedit_str_colors_dir|........directory to output colorschemes to
+  |g:csedit_en_merge_gui|..........flag to output cterm and gui in one line
+  |g:csedit_en_terminal_bg|........flag to use terminal background color
+  |g:csedit_en_colorname|..........flag to use colornames such as White,Black
+  |g:csedit_en_auto_apply|.........flag to apply colorscheme after build
+
+Dump-options:
+  |g:csedit_str_dump_dir|..........directory to output *.csed to
+  |g:csedit_str_dump_prefix|.......prefix to dump
+  |g:csedit_en_dump_guisp|.........flag to dump guisp
+  |g:csedit_arr_dump_keys|.........additional highlight names to dump
+
+Highlight-options:
+  |g:csedit_en_adjust|.............flag to adjust colors while editing
+
+Templates:
+  |g:csedit_text_header|...........template (header)
+  |g:csedit_text_footer|...........template (footer)
+  |g:csedit_text_man|..............template (manual)
+  |g:csedit_text_note|.............template (note)
+  |g:csedit_str_preset|............(reserved)
+
+BUILD-OPTIONS                                            *csedit-build-options*
+-------------
+                                                      *g:csedit_str_colors_dir*
+g:csedit_str_colors_dir (default: '~/.vim/colors')
+  Sets the name of the directory to output colorscheme files.
+
+                                                        *g:csedit_en_merge_gui*
+g:csedit_en_merge_gui (default: 1)
+  Use this option to control whether the plugin outputs "cterm" and "gui" in
+  one line.
+
+  = 0: The output is >
+  if has('gui_running')
+    hi Normal guifg=#d0d0d0 guibg=#262626 gui=NONE
+    ...
+  else
+    hi Normal ctermfg=252 ctermbg=NONE cterm=NONE
+    ...
+  endif
+<
+  = 1: The output is >
+  hi Normal guifg=#d0d0d0 guibg=#262626 ctermfg=252 ctermbg=NONE gui=NONE cterm=NONE
+  ...
+<
+
+                                                      *g:csedit_en_terminal_bg*
+g:csedit_en_terminal_bg (default: 0)
+  Use this option to control whether the plugin uses the terminal background
+  color.
+
+  If .csed file is as follows, >
+    #name     fg   bg
+    Normal   252  235
+<
+→
+  = 0: The output is >
+    hi Normal ctermfg=252 ctermbg=NONE ...
+<
+  = 1: The output is >
+    hi Normal ctermfg=252 ctermbg=235 ...
+<
+
+                                                        *g:csedit_en_colorname*
+g:csedit_en_colorname (default: 1, recommend: 1)
+  Use this option to control whether the plugin uses colornames (such as Blue,
+  Gray,White etc.).
+
+  If you set this option to 1, colornames are available and you can edit
+  .csed file as follows >
+    #name      fg     bg
+    Normal  White  Black
+< instead of >
+    #name      fg     bg
+    Normal     15      0
+<
+  see also >
+  :help cterm-colors
+<
+
+                                                       *g:csedit_en_auto_apply*
+
+g:csedit_en_auto_apply (default: 0)
+  Use this option to control whether Vim applies colorscheme after building.
+
+  If set this option to 1, ex-command >
+    source <colorscheme>.vim
+<
+  will be executed after builds.
+
+
+DUMP-OPTIONS                                              *csedit-dump-options*
+-------------
+                                                        *g:csedit_str_dump_dir*
+g:csedit_str_dump_dir (default: '~/.vim/colors')
+  Sets the name of the directory to output .csed files.
+
+                                                     *g:csedit_str_dump_prefix*
+g:csedit_str_dump_prefix (default: 'dump-')
+  Sets the name of the prefix.
+
+  You may want to set it empty, but be careful not to overwrite the original
+  colorscheme file.
+
+                                                       *g:csedit_en_dump_guisp*
+g:csedit_en_dump_guisp (default: 0)
+  Use this option to control whether the plugin dumps guisp.
+
+                                                       *g:csedit_arr_dump_keys*
+g:csedit_arr_dump_keys (default: [])
+  Sets additional highlight names to dump.
+
+  Use as follows. >
+  let g:csedit_arr_dump_keys = [
+    \ 'Directory', 'Question', 'Conceal',
+    \ 'Repeat', 'Label', 'Keyword',
+    \ ]
+<
+  see >
+  :help group-name
+  :help highlight-groups
+<
+
+HIGHLIGHT-OPTIONS                                    *csedit-highlight-options*
+-----------------
+                                                           *g:csedit_en_adjust*
+g:csedit_en_adjust (default: 1)
+
+>
+  #name           fg   bg
+  PmenuSbar      235  235
+  PmenuThumb     235  235
+<
+  When fg and bg are the same colors, you can't see the text and hard to edit
+  it.But if set it to 1, the value of fg is temporarily modified and you can
+  see it.
+  This is only effective duaring editing, and does not have any effects on
+  outputs.
+
+TEMPLATES                                                    *csedit-templates*
+-----------------
+                                                         *g:csedit_text_header*
+                                                         *g:csedit_text_footer*
+                                                            *g:csedit_text_man*
+                                                           *g:csedit_text_note*
+  These are templates.
+  Use as follows.  >
+    let g:csedit_text_header = ''
+        \ . '" header '           ."\n"
+        \ . '"   text'            ."\n"
+
+    let g:csedit_text_footer = ''
+        \ . '" footer '           ."\n"
+        \ . '"   text'            ."\n"
+
+    let g:csedit_text_man = ''
+        \ . '# This is manual '   ."\n"
+
+    let g:csedit_text_note = ''
+        \ . '# This is note'       ."\n"
+<
+  line break is "\n" 
+
+                                                          *g:csedit_str_preset*
+g:csedit_str_preset (default: 'tango')
+
+  Only 'tango' is available at this point.
+  It defines the mapping from terminal colors to GUI colors.
+
+==============================================================================
+CHANGE LOG                                                   *csedit-changelog*
+
+v1.0.0 ~
+  - First public version.
+
+==============================================================================
+LICENSE                                                        *csedit-license*
+
+MIT License
+
+Copyright (c) 2019 nokobear
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+vim:tw=78:ts=8:noet:ft=help:norl:
