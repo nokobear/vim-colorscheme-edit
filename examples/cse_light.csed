@@ -1,0 +1,45 @@
+HeaderBegin:
+"------------------------------------------------------------
+" File:        examples/cse_light.csed
+" Author:      nokobear <nokobear.git at gmail dot com>
+" URL:         https://github.com/nokobear/vim-colorscheme-edit
+" License:     MIT license
+" Last Change: 2019 Aug 26
+"------------------------------------------------------------
+HeaderEnd:
+Background: light
+
+# CTRL-l  redraw highlights
+# CTRL-s  write colorscheme to file
+#----------------------------------------
+# id              fg   bg   sp/attr
+ScseditComment   243    -
+ScseditCommentqw  65    -
+ScseditAttr      160    -
+ScseditDark      160    -
+ScseditLight     160    -
+ScseditPreserve   33    -
+ScseditNumber     94    -
+ScseditCname      94    -
+ScseditMinus      94    -
+ScseditTodo       58  181
+
+FooterBegin:
+" Created with vim-colorscheme-edit v1.0.0
+"   https://github.com/nokobear/vim-colorscheme-edit
+FooterEnd:
+
+# NOTE:
+#----------------------------------------
+# attr:
+#   bold inverse italic nocombine reverse standout
+#   strikethrough undercurl underline
+#
+# sp:
+#   sp defines attr-colors such as undercurl or strikethrough.
+#   It is available only in GUI mode.
+# use as follows
+# name           fg    bg  sp    attr
+# DiffDelete     196   -   124   strikethrough
+# DiffAdd        231   -   231   bold,italic,undercurl
+#----------------------------------------

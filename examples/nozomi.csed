@@ -1,0 +1,112 @@
+
+# Created with vim-colorscheme-edit v1.0.0
+#   https://github.com/nokobear/vim-colorscheme-edit
+#
+# This is my favorite theme. (-:
+
+HeaderBegin:
+"----------------------------------------------------------------------
+"                                                                  ###
+"  ## #####       ######    #########    ######     ## ###  ####   ###
+"  #########    ##      ##       ###   ##      ##   #############
+"  ####   ###  ##        ##     ###   ##        ##   ###  ###  ##   ##
+"  ###    ###  ##        ##   ###     ##        ##   ##   ##   ##   ##
+"  ###    ###   ##      ##   ###       ##      ##    ##   ##   ##   ###
+"  ###    ###     ######    #########    ######      ##   ##   ##   ###
+"
+" A dark but colorful and midium brightness colorscheme for VIM.
+"----------------------------------------------------------------------
+" File:        colors/nozomi.vim
+" Author:      nokobear <nokobear.git at gmail dot com>
+" URL:         https://github.com/nokobear/vim-nozomi
+" License:     MIT license
+" Last Change: 2019 Aug 26
+"----------------------------------------------------------------------
+HeaderEnd:
+background: dark
+
+#  CTRL-l  redraw highlights
+#  CTRL-s  write colorscheme to file
+#----------------------------------------
+# name          fg   bg   sp/attr
+Normal         252  235
+Comment        244    -
+Constant       227    -
+String          74    -
+Character      210    -
+Number         227    -
+Boolean        227    -
+Float          227    -
+Identifier      38    -
+Function        37    -
+Statement      204    -
+Conditional    184    -
+Operator       202    -
+Exception      185    -
+PreProc        148    -
+Type           203    -
+StorageClass   172    -
+Special        211    -
+Underlined     110    -
+Ignore         232  237
+Error          202   52
+Todo           214   96
+ColorColumn      -  237
+DiffAdd        159   23
+DiffChange     251   58
+DiffDelete     196   52
+DiffText       224   97
+ErrorMsg       214   52
+Folded         232  238
+FoldColumn      81  241
+IncSearch      235  108
+LineNr         244  235
+ModeMsg        241    -
+MoreMsg        241    -
+NonText        236    -
+Pmenu           81   24
+PmenuSel        24  253
+PmenuSbar      235  235
+PmenuThumb     235  235
+Search         231  132
+SpellBad       160  180
+SpellCap       130  180
+SpellLocal      28  180
+SpellRare      196  180
+StatusLine     254  238
+StatusLineNC   240  235
+TabLine        248  237
+TabLineFill    238  238
+TabLineSel     234  150
+Title          159    -
+Visual         209  238
+VisualNOS      209  238
+WarningMsg     222    -
+WildMenu        24  253
+CursorColumn     -  238
+CursorLine       -  236
+CursorLineNr   115    -
+MatchParen     253   60
+SignColumn       -  234
+SpecialKey     239    -
+VertSplit      234  238
+
+FooterBegin:
+" Created with vim-colorscheme-edit v1.0.0
+"   https://github.com/nokobear/vim-colorscheme-edit
+FooterEnd:
+
+# NOTE:
+#----------------------------------------
+# attr:
+#   bold inverse italic nocombine reverse standout
+#   strikethrough undercurl underline
+#
+# sp:
+#   sp defines attr-colors such as undercurl or strikethrough.
+#   It is available only in GUI mode.
+# use as follows
+# name           fg    bg  sp    attr
+# DiffDelete     196   -   124   strikethrough
+# DiffAdd        231   -   231   bold,italic,undercurl
+#----------------------------------------
